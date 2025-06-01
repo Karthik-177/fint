@@ -122,44 +122,52 @@
         /* Main Content Styles */
         .main-content {
             margin-left: 250px;
-            padding: 0;
             width: calc(100% - 250px);
             min-height: 100vh;
             background-color: var(--bg);
             transition: background-color 0.3s ease;
+            display: flex;
+            flex-direction: column;
         }
 
         .content-wrapper {
+            flex: 1;
+            width: 100%;
             padding: 2rem;
         }
 
         .page-header {
-            margin-bottom: 2rem;
-            padding: 0 2rem;
+            text-align: left;
+            margin-bottom: 2.5rem;
+            padding: 0;
         }
 
         .page-title {
-            font-size: 2.25rem !important;
+            font-size: 2rem !important;
             font-weight: 600;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
             color: var(--text-color);
+            line-height: 1.2;
         }
 
         .page-description {
-            font-size: 1.2rem !important;
+            font-size: 1.1rem !important;
             color: var(--text-color);
+            opacity: 0.8;
+            max-width: 600px;
         }
 
         /* Tab Navigation */
         .tab-navigation {
             display: flex;
-            gap: 1rem;
-            margin-bottom: 2rem;
+            gap: 2rem;
+            margin-bottom: 2.5rem;
             border-bottom: 2px solid var(--border);
+            padding: 0;
         }
 
         .tab-button {
-            padding: 1rem 2rem;
+            padding: 1rem 1.5rem;
             background: none;
             border: none;
             color: var(--text-color);
@@ -167,7 +175,7 @@
             cursor: pointer;
             position: relative;
             transition: var(--transition);
-            font-size: 1.2rem !important;
+            font-size: 1.1rem !important;
         }
 
         .tab-button.active {
@@ -184,36 +192,197 @@
             background: var(--primary);
         }
 
-        /* Form Styles */
-        .form-section {
-            max-width: 1200px;
+        /* Transaction Layout */
+        .transaction-layout {
+            display: grid;
+            grid-template-columns: minmax(auto, 800px) minmax(auto, 400px);
+            gap: 2rem;
+            width: 100%;
+            max-width: 1280px;
             margin: 0;
-            padding: 0 2rem;
+            align-items: start;
         }
 
-        .form-group {
+        .manual-transaction {
+            background: var(--card-bg);
+            border-radius: 1rem;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            height: fit-content;
+        }
+
+        .bank-statement-upload {
+            background: var(--card-bg);
+            border-radius: 1rem;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            height: fit-content;
+        }
+
+        .section-title {
+            font-size: 1.5rem !important;
+            font-weight: 600;
             margin-bottom: 2rem;
+            color: var(--text-color);
+            text-align: left;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        /* Upload Area Styles */
+        .upload-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .upload-area {
+            width: 100%;
+            border: 2px dashed var(--border);
+            border-radius: 0.75rem;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: var(--bg);
+            margin: 1rem 0;
+            position: relative;
+        }
+
+        /* Hide the default file input button */
+        input[type="file"] {
+            opacity: 0;
+            width: 0.1px;
+            height: 0.1px;
+            position: absolute;
+        }
+
+        .upload-area label {
+            display: inline-block;
+            padding: 0.75rem 2rem;
+            background: var(--primary);
+            color: white;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            margin-top: 1rem;
+        }
+
+        .upload-area label:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+        }
+
+        .upload-area i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .upload-area p {
+            margin: 0.5rem 0;
+            color: var(--text-color);
+            font-size: 1rem;
+        }
+
+        .upload-area:hover {
+            border-color: var(--primary);
+            background: rgba(37, 99, 235, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .upload-hint {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin: 0.5rem 0;
+        }
+
+        .upload-info {
+            width: 100%;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .supported-formats,
+        .file-size-limit {
+            font-size: 0.875rem;
+            color: var(--text-color);
+            opacity: 0.7;
+            margin: 0.25rem 0;
+        }
+
+        .upload-preview {
+            display: none;
+            margin-top: 1rem;
+            padding: 1rem;
+            border: 1px solid var(--border);
+            border-radius: 0.75rem;
+            background: var(--card-bg);
+        }
+
+        .preview-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .preview-header i {
+            font-size: 1.25rem;
+            color: var(--primary);
+        }
+
+        .preview-actions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .remove-file {
+            background: none;
+            border: none;
+            color: var(--danger);
+            cursor: pointer;
+            font-size: 0.875rem;
+        }
+
+        .upload-file {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            font-size: 0.875rem;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 1.5rem;
             width: 100%;
         }
 
         .form-label {
             display: block;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
             font-weight: 500;
             color: var(--text-color);
-            font-size: 1.2rem !important;
+            font-size: 1rem !important;
         }
 
         .form-control {
             width: 100%;
-            padding: 1.3rem;
+            padding: 0.875rem 1rem;
             border: 1px solid var(--border);
             border-radius: 0.5rem;
-            background: var(--card-bg);
+            background: var(--bg);
             color: var(--text-color);
-            transition: var(--transition);
-            font-size: 1.1rem !important;
-            min-width: 400px;
+            transition: all 0.2s ease;
+            font-size: 1rem !important;
         }
 
         .form-control:focus {
@@ -223,14 +392,15 @@
         }
 
         .transaction-type {
-            display: flex;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
             margin-bottom: 2rem;
             width: 100%;
         }
 
         .type-btn {
-            flex: 1;
+            width: 100%;
             padding: 1.3rem;
             border: 1px solid var(--border);
             border-radius: 0.5rem;
@@ -243,7 +413,6 @@
             justify-content: center;
             gap: 0.75rem;
             font-size: 1.2rem !important;
-            min-width: 250px;
         }
 
         .type-btn i {
@@ -506,66 +675,117 @@
             cursor: pointer;
             transition: var(--transition);
             font-size: 1.2rem !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
         }
 
         .btn-primary {
             background: var(--primary);
             color: white;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
         }
 
         .btn-primary:hover {
             background: var(--primary-hover);
+            box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3);
         }
 
         .btn-secondary {
-            background: transparent;
+            background: var(--bg);
             border: 1px solid var(--border);
             color: var(--text-color);
         }
 
         .btn-secondary:hover {
             background: var(--bg);
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1280px) {
+            .transaction-layout {
+                grid-template-columns: minmax(auto, 700px) minmax(auto, 350px);
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .transaction-layout {
+                grid-template-columns: 1fr;
+                max-width: 800px;
+            }
+
+            .bank-statement-upload {
+                max-width: 100%;
+            }
         }
 
         @media (max-width: 768px) {
             .sidebar {
-                display: none;
+                transform: translateX(-100%);
+                z-index: 1000;
             }
-            
+
             .main-content {
                 margin-left: 0;
                 width: 100%;
             }
 
-            .search-filters {
-                flex-direction: column;
+            .content-wrapper {
+                padding: 1.5rem;
             }
 
-            .search-input, .filter-select {
-                width: 100%;
+            .page-header {
+                padding: 1.5rem 0;
+                margin-bottom: 2rem;
+            }
+
+            .page-title {
+                font-size: 1.75rem !important;
+            }
+
+            .tab-navigation {
+                padding: 0 1rem;
+                margin-bottom: 2rem;
+            }
+
+            .tab-button {
+                padding: 1rem 1.5rem;
             }
 
             .transaction-layout {
-                grid-template-columns: 1fr;
-                padding: 0 1rem;
-            }
-
-            .form-section {
-                padding: 0 1rem;
+                padding: 0;
             }
 
             .manual-transaction,
             .bank-statement-upload {
-                max-width: 100%;
-                margin: 0;
+                padding: 1.5rem;
             }
 
-            .form-control {
-                min-width: 100%;
+            .section-title {
+                font-size: 1.25rem !important;
+                margin-bottom: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .content-wrapper {
+                padding: 1rem;
             }
 
-            .type-btn {
-                min-width: 100%;
+            .page-header {
+                padding: 1rem 0;
+            }
+
+            .tab-button {
+                padding: 0.75rem 1rem;
+                font-size: 0.875rem !important;
             }
         }
 
@@ -677,19 +897,39 @@
             background-color: var(--card-bg);
             border: 2px solid var(--border);
             color: var(--text-color);
-            padding: 0.5rem;
+            padding: 0.75rem;
             border-radius: 9999px;
             cursor: pointer;
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
+            width: 40px;
+            height: 40px;
         }
 
         #themeToggle:hover {
             background-color: var(--bg);
             transform: scale(1.05);
             border-color: var(--primary);
+        }
+
+        #themeToggle svg {
+            width: 20px;
+            height: 20px;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            fill: none;
+        }
+
+        [data-theme="dark"] #sunIcon {
+            display: none;
+        }
+
+        [data-theme="light"] #moonIcon {
+            display: none;
         }
 
         #profileButton {
@@ -772,168 +1012,6 @@
             font-size: 0.875rem;
             border-bottom: 1px solid var(--border);
         }
-
-        /* Transaction Layout */
-        .transaction-layout {
-            display: grid;
-            grid-template-columns: 1fr 1.5fr;
-            gap: 2rem;
-            max-width: 1600px;
-            margin: 0;
-            padding: 0 2rem;
-            position: relative;
-        }
-
-        .manual-transaction {
-            max-width: 1000px;
-            margin-left: 200px;
-            padding: 2.5rem;
-            background: var(--card-bg);
-            border-radius: 1rem;
-            border: 1px solid var(--border);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .bank-statement-upload {
-            max-width: 400px;
-            margin-left: auto;
-            margin-right: 0;
-            position: absolute;
-            right: -200px;
-            top: 0;
-        }
-
-        @media (max-width: 1400px) {
-            .manual-transaction {
-                margin-left: 100px;
-            }
-            .bank-statement-upload {
-                right: 0;
-                margin-right: 2rem;
-            }
-        }
-
-        @media (max-width: 1200px) {
-            .manual-transaction {
-                margin-left: 0;
-            }
-            .bank-statement-upload {
-                position: static;
-                margin: 2rem 0 0 0;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .transaction-layout {
-                grid-template-columns: 1fr;
-                padding: 0 1rem;
-            }
-
-            .form-section {
-                padding: 0 1rem;
-            }
-
-            .manual-transaction,
-            .bank-statement-upload {
-                max-width: 100%;
-                margin: 0;
-            }
-
-            .form-control {
-                min-width: 100%;
-            }
-
-            .type-btn {
-                min-width: 100%;
-            }
-        }
-
-        .section-title {
-            font-size: 1.5rem !important;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-            color: var(--text-color);
-        }
-
-        /* Bank Statement Upload Styles */
-        .bank-statement-upload {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 1rem;
-            padding: 2rem;
-        }
-
-        .upload-container {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .upload-area {
-            border: 2px dashed var(--border);
-            border-radius: 1rem;
-            padding: 2rem;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .upload-area:hover {
-            border-color: var(--primary);
-            background: rgba(37, 99, 235, 0.05);
-        }
-
-        .upload-area i {
-            font-size: 3rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .upload-area p {
-            margin: 0.5rem 0;
-            color: var(--text-color);
-        }
-
-        .upload-hint {
-            font-size: 0.9rem !important;
-            opacity: 0.7;
-        }
-
-        .upload-info {
-            text-align: center;
-            font-size: 0.9rem !important;
-            color: var(--text-color);
-            opacity: 0.7;
-        }
-
-        .upload-preview {
-            background: var(--bg);
-            border: 1px solid var(--border);
-            border-radius: 0.75rem;
-            padding: 1rem;
-        }
-
-        .preview-header {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 1rem;
-        }
-
-        .preview-header i {
-            color: var(--success);
-            font-size: 1.5rem !important;
-        }
-
-        .preview-actions {
-            display: flex;
-            gap: 1rem;
-            justify-content: flex-end;
-        }
-
-        .hidden {
-            display: none;
-        }
     </style>
 </head>
 <body>
@@ -992,9 +1070,20 @@
         <div class="header">
             <h1>Add Transaction</h1>
             <div class="header-actions">
-                <button id="themeToggle" class="p-2 rounded-full border-2 border-gray-700 dark:border-gray-300 transition hover:scale-105" type="button" aria-label="Toggle theme">
-                    <svg id="themeIcon" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                <button id="themeToggle" class="p-2 rounded-full transition hover:scale-105" type="button" aria-label="Toggle theme">
+                    <svg id="sunIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="4"></circle>
+                        <path d="M12 2v2"></path>
+                        <path d="M12 20v2"></path>
+                        <path d="M4.93 4.93l1.41 1.41"></path>
+                        <path d="M17.66 17.66l1.41 1.41"></path>
+                        <path d="M2 12h2"></path>
+                        <path d="M20 12h2"></path>
+                        <path d="M6.34 17.66l-1.41 1.41"></path>
+                        <path d="M19.07 4.93l-1.41 1.41"></path>
+                    </svg>
+                    <svg id="moonIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
                 </button>
                 <div class="relative">
@@ -1088,8 +1177,8 @@
                                 <i class="fas fa-file-excel"></i>
                                 <p>Drag & drop your Excel file here</p>
                                 <p class="upload-hint">or</p>
-                                <label for="fileInput" class="btn btn-primary">Choose File</label>
-                                <input type="file" id="fileInput" accept=".xlsx,.xls" class="hidden">
+                                <input type="file" id="fileInput" accept=".xlsx,.xls">
+                                <label for="fileInput">Choose File</label>
                             </div>
                             <div class="upload-info">
                                 <p class="supported-formats">Supported formats: .xlsx, .xls</p>
@@ -1336,14 +1425,10 @@
         document.addEventListener('DOMContentLoaded', () => {
             const htmlElement = document.documentElement;
             const themeToggle = document.getElementById('themeToggle');
-            const themeIcon = document.getElementById('themeIcon');
-            const profileButton = document.getElementById('profileButton');
-            const profileDropdown = document.getElementById('profileDropdown');
 
             // Load saved theme
             const savedTheme = localStorage.getItem('theme') || 'light';
             htmlElement.setAttribute('data-theme', savedTheme);
-            updateThemeIcon(savedTheme === 'dark');
 
             // Theme toggle handler
             themeToggle.addEventListener('click', () => {
@@ -1351,29 +1436,7 @@
                 const newTheme = currentTheme === 'light' ? 'dark' : 'light';
                 htmlElement.setAttribute('data-theme', newTheme);
                 localStorage.setItem('theme', newTheme);
-                updateThemeIcon(newTheme === 'dark');
             });
-
-            // Profile dropdown toggle
-            profileButton.addEventListener('click', (e) => {
-                e.stopPropagation();
-                const isExpanded = profileButton.getAttribute('aria-expanded') === 'true';
-                profileDropdown.classList.toggle('hidden', isExpanded);
-                profileButton.setAttribute('aria-expanded', !isExpanded);
-            });
-
-            // Close dropdown when clicking outside
-            document.addEventListener('click', () => {
-                profileDropdown.classList.add('hidden');
-                profileButton.setAttribute('aria-expanded', 'false');
-            });
-
-            // Update theme icon
-            function updateThemeIcon(isDark) {
-                themeIcon.innerHTML = isDark ? 
-                    '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>' :
-                    '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>';
-            }
         });
 
         // Bank Statement Upload Functionality
